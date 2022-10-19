@@ -10,3 +10,17 @@ Dopo che sono stati inseriti i 5 numeri,
 il software dice quanti 
 e quali dei numeri da indovinare sono stati individuati.
 */
+
+const numToGuess = document.getElementById('numbers');
+
+const NUM_GUESS = 5; 
+const toGuess = [];
+
+  //RANDOM 5 NUMBERS TO GUESS
+  while(toGuess.length < NUM_GUESS){
+    const num = randomNumber(1,5);
+    if(!toGuess.includes(num)){
+        toGuess.push(num);
+    }
+}
+console.log(toGuess);
