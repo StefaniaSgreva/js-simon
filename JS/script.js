@@ -12,15 +12,19 @@ e quali dei numeri da indovinare sono stati individuati.
 */
 
 const numToGuess = document.querySelector('.guess');
+const numUserHtml = document.querySelector('.userNum');
+const btn = document.querySelector('.push');
+document.getElementById("userInputs").style.visibility = "hidden";
 
 const NUM_GUESS = 5; 
 const toGuess = [];
+const userAttempts = [];
 const MAX_ATTEMPT = 5;
 
 
   //RANDOM 5 NUMBERS TO GUESS
   while(toGuess.length < NUM_GUESS){
-    const num = randomNumber(1,5);
+    const num = randomNumber(1,100);
     if(!toGuess.includes(num)){
         toGuess.push(num);
     }
@@ -28,4 +32,19 @@ const MAX_ATTEMPT = 5;
 console.log(toGuess);
 numToGuess.innerHTML = `Try to remember: ${toGuess}`;
 
-
+let timer = setInterval(function() {
+    const elem = document.getElementById("countdown");
+    let val = parseInt(elem.innerHTML);
+  
+    if (val === 0) {
+      clearInterval(timer);
+      elem.innerHTML = '';
+      numToGuess.innerHTML = '';
+      document.getElementById("userInputs").style.visibility = "visible";
+      return;
+    } else{
+         val--;
+    }
+    
+    elem.innerHTML = val;
+  }, 3000);
