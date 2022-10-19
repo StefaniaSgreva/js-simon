@@ -11,10 +11,12 @@ il software dice quanti
 e quali dei numeri da indovinare sono stati individuati.
 */
 
-const numToGuess = document.getElementById('numbers');
+const numToGuess = document.querySelector('.guess');
 
 const NUM_GUESS = 5; 
 const toGuess = [];
+const MAX_ATTEMPT = 5;
+
 
   //RANDOM 5 NUMBERS TO GUESS
   while(toGuess.length < NUM_GUESS){
@@ -24,3 +26,6 @@ const toGuess = [];
     }
 }
 console.log(toGuess);
+numToGuess.innerHTML = `Try to remember: ${toGuess}`;
+
+
