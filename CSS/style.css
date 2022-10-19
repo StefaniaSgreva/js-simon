@@ -29,8 +29,18 @@ body{
     transform: translate(-50%, -50%);
 }
 .userNum{
-   
+   padding: 5px 20px;
 }
-.push{
-    
+.popup{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 2px solid black;
+    width: 700px;
+    height: 250px;
+    visibility: hidden;
+}
+.popup.active{
+    visibility: visible;
 }

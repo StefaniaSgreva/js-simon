@@ -14,12 +14,14 @@ e quali dei numeri da indovinare sono stati individuati.
 const numToGuess = document.querySelector('.guess');
 const numUserHtml = document.querySelector('.userNum');
 const btn = document.querySelector('.push');
+const popup = document.querySelector('.popup');
+const result = document.getElementById('result');
 document.getElementById("userInputs").style.visibility = "hidden";
 
 const NUM_GUESS = 5; 
 const toGuess = [];
 const userAttempts = [];
-const MAX_ATTEMPT = 5;
+const MAX_ATTEMPTS = 5;
 
 
   //RANDOM 5 NUMBERS TO GUESS
@@ -32,6 +34,7 @@ const MAX_ATTEMPT = 5;
 console.log(toGuess);
 numToGuess.innerHTML = `Try to remember: ${toGuess}`;
 
+//COUNTDOWN
 let timer = setInterval(function() {
     const elem = document.getElementById("countdown");
     let val = parseInt(elem.innerHTML);
@@ -47,4 +50,23 @@ let timer = setInterval(function() {
     }
     
     elem.innerHTML = val;
-  }, 3000);
+  }, 1000);
+
+
+
+  //USER ATTEMPTS
+  function attempts(){
+    if(userAttempts.length == MAX_ATTEMPTS){
+        console.log('stop');
+        document.getElementById("userInputs").innerHTML = '';
+        popup.classList.add('active');
+        // result.innerHTML = 'score';
+    }else{
+        userAttempts.push(numUserHtml.value);
+    }
+  numUserHtml.value = '';
+
+  }
+
+  btn.addEventListener('click', attempts);
+  console.log( userAttempts);
