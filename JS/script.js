@@ -52,21 +52,40 @@ let timer = setInterval(function() {
     elem.innerHTML = val;
   }, 1000);
 
-
-
-  //USER ATTEMPTS
-  function attempts(){
-    if(userAttempts.length == MAX_ATTEMPTS){
+//USER ATTEMPTS
+function userValuePush(){
+    if(userAttempts.length < toGuess.length){
+        let inputValue = parseInt(numUserHtml.value);
+        userAttempts.push(inputValue);
+        console.log(userAttempts);
+    } else {
         console.log('stop');
-        document.getElementById("userInputs").innerHTML = '';
+        document.getElementById("userInputs").innerHTML = '';  
         popup.classList.add('active');
-        // result.innerHTML = 'score';
-    }else{
-        userAttempts.push(numUserHtml.value);
+        // btn.removeEventListener('click', userValuePush);
     }
-  numUserHtml.value = '';
+    numUserHtml.value = '';
+}
+btn.addEventListener('click', userValuePush);
 
-  }
+//SCORE
 
-  btn.addEventListener('click', attempts);
-  console.log( userAttempts);
+
+
+
+
+
+
+  
+  
+  
+  
+  
+
+
+
+
+
+    
+
+    
