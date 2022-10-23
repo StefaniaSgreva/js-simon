@@ -20,9 +20,11 @@ const userNums = [];
 const inputHtml = document.getElementsByTagName('input');
 const btn = document.querySelector('button');
 const guessedNums = [];
-// const popup = document.querySelector('.popup');
-// const result = document.getElementById('result');
 const alertHtml = document.querySelector('.alert');
+const simon = document.querySelector('h1');
+// const popup = document.querySelector('.popup');
+// const close = document.querySelector('.close');
+// const result = document.getElementById('result');
 
 //FUNZIONI
 
@@ -72,6 +74,7 @@ function resetAll(){
   btn.classList.toggle('d-none');
   alertHtml.innerHTML = '';
   alertHtml.classList.add('d-none');
+  simon.innerHTML = '';
 }
 
 btn.addEventListener('click', showResult);
@@ -90,24 +93,17 @@ function showResult(){
               guessedNums.push(userNums[i]);
           }
       }
-  }
-  console.log(guessedNums);
-  alertHtml.classList.remove('d-none');
-  if(numsToGuess.length === guessedNums.length){
-      alertHtml.innerHTML = 'indovinato';
-  
-    }  else if(!guessedNums.length){
-    alertHtml.innerHTML = 'perso';
+      console.log(guessedNums);
+      alertHtml.classList.remove('d-none');
+      if(numsToGuess.length === guessedNums.length){
+        alertHtml.innerHTML = `You Win ! `;
+      
+        }  else if(!guessedNums.length){
+          alertHtml.innerHTML = `Game Over ! You haven't guessed even a number :(`;
 
-  }else if(numsToGuess.length > guessedNums.length){
-    alertHtml.innerHTML = `indovinato ${guessedNums.length} 
-    questi ${guessedNums}`;
+      }else if(numsToGuess.length > guessedNums.length){
+        alertHtml.innerHTML = `Game Over ! You guessed ${guessedNums.length} numbers these two: ${guessedNums}`; 
+      }
   }
-
 }
-
-
-
   
-  
-
