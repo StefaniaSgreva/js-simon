@@ -14,7 +14,7 @@
 </head>
 <body>
 
-    <div id="numbers">
+    <!-- <div id="numbers">
         <h1 class="guess"></h1>
         <h2 id="countdown">1</h2>
         <div id="userInputs" class="text-center">
@@ -26,6 +26,23 @@
         <div class="popup text-center d-flex justify-content-center align-items-center">
             <h2 id="result"></h2>
         </div> 
+    </div> -->
+    <div id="app" class="vh-100 w-100 d-flex flex-column justify-content-center align-items-center">
+        <h1 class="guess"></h1>
+        <!-- <h2 id="countdown" class="py-5">3</h2> -->
+        <section class="d-flex justify-content-center align-items-center">
+            <input type="number" name="in0" readonly>
+            <input type="number" name="in1" readonly>
+            <input type="number" name="in2" readonly>
+            <input type="number" name="in3" readonly>
+            <input type="number" name="in4" readonly>
+        </section>
+
+        <button class="mybtn mt-5 d-none">Check</button>
+
+        <div class="alert alert-success mt-2 d-none">
+            
+        </div>
     </div>
 
    <script src="./JS/script.js"></script> 

@@ -11,81 +11,103 @@ il software dice quanti
 e quali dei numeri da indovinare sono stati individuati.
 */
 
-const numToGuess = document.querySelector('.guess');
-const numUserHtml = document.querySelector('.userNum');
-const btn = document.querySelector('.push');
-const popup = document.querySelector('.popup');
-const result = document.getElementById('result');
-document.getElementById("userInputs").style.visibility = "hidden";
+// VARIABILI
 
-const NUM_GUESS = 5; 
-const toGuess = [];
-const userAttempts = [];
-const MAX_ATTEMPTS = 5;
+let time = 3;
+const NUMBERS_NUM = 5;
+const numsToGuess = [];
+const userNums = [];
+const inputHtml = document.getElementsByTagName('input');
+const btn = document.querySelector('button');
+const guessedNums = [];
+// const popup = document.querySelector('.popup');
+// const result = document.getElementById('result');
+const alertHtml = document.querySelector('.alert');
 
+//FUNZIONI
 
-  //RANDOM 5 NUMBERS TO GUESS
-  while(toGuess.length < NUM_GUESS){
-    const num = randomNumber(1,100);
-    if(!toGuess.includes(num)){
-        toGuess.push(num);
-    }
-}
-console.log(toGuess);
-numToGuess.innerHTML = `Try to remember: ${toGuess}`;
+function init(){
+  
+  const min = 1;
+  const max = 50;
+  let counter = 0;
+  while(numsToGuess.length < NUMBERS_NUM){
+      const num = randomNumber(min, max);
+      if(!numsToGuess.includes(num)){
+          numsToGuess.push(num);
+          inputHtml[counter].value = num;
+          counter++;
+      }
+  }
+  console.log(numsToGuess);
+  const timer = setTimeout(resetAll, time * 1000, false);
+  
+} 
+//INVOCO LA FUNZIONE
+init();
 
 //COUNTDOWN
-let timer = setInterval(function() {
-    const elem = document.getElementById("countdown");
-    let val = parseInt(elem.innerHTML);
+// let timer = setInterval(function() {
+//     const elem = document.getElementById("countdown");
+//     let val = parseInt(elem.innerHTML);
   
-    if (val === 0) {
-      clearInterval(timer);
-      elem.innerHTML = '';
-      numToGuess.innerHTML = '';
-      document.getElementById("userInputs").style.visibility = "visible";
-      return;
-    } else{
-         val--;
-    }
+//     if (val === 0) {
+//       clearInterval(timer);
+//       elem.innerHTML = '';
+//       numsToGuess.innerHTML = '';
+//       return;
+//     } else{
+//          val--;
+//     }
     
-    elem.innerHTML = val;
-  }, 1000);
+//     elem.innerHTML = val;
 
-//USER ATTEMPTS
-function userValuePush(){
-    if(userAttempts.length < toGuess.length){
-        let inputValue = parseInt(numUserHtml.value);
-        userAttempts.push(inputValue);
-        console.log(userAttempts);
-    } else {
-        console.log('stop');
-        document.getElementById("userInputs").innerHTML = '';  
-        popup.classList.add('active');
-        // btn.removeEventListener('click', userValuePush);
-    }
-    numUserHtml.value = '';
+//   }, resetAll, time * 1000);
+
+function resetAll(){
+  for(let i = 0; i < inputHtml.length; i++){
+      inputHtml[i].value = '';
+      inputHtml[i].toggleAttribute('readonly');
+  }
+  btn.classList.toggle('d-none');
+  alertHtml.innerHTML = '';
+  alertHtml.classList.add('d-none');
 }
-btn.addEventListener('click', userValuePush);
 
-//SCORE
+btn.addEventListener('click', showResult);
 
+function showResult(){
+  for(let i = 0; i < inputHtml.length; i++){
+      const userNum = parseInt(inputHtml[i].value);
+      //qui si potrebbe controllare se è un numero, se l'imput è vuoto...
+      //controllare che ha inserito 5 numeri
+      userNums.push(userNum); 
+  }
+  // console.log(userNums);
+  for(let i = 0; i < userNums.length; i++){
+      if(numsToGuess.includes(userNums[i])){
+          if(!guessedNums.includes(userNums[i])){
+              guessedNums.push(userNums[i]);
+          }
+      }
+  }
+  console.log(guessedNums);
+  alertHtml.classList.remove('d-none');
+  if(numsToGuess.length === guessedNums.length){
+      alertHtml.innerHTML = 'indovinato';
+  
+    }  else if(!guessedNums.length){
+    alertHtml.innerHTML = 'perso';
 
+  }else if(numsToGuess.length > guessedNums.length){
+    alertHtml.innerHTML = `indovinato ${guessedNums.length} 
+    questi ${guessedNums}`;
+  }
 
-
+}
 
 
 
   
   
-  
-  
-  
 
-
-
-
-
-    
-
-    
